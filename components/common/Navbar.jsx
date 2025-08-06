@@ -1,19 +1,21 @@
 import React from 'react'
+import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
+import Container from '../common/Container'
 
 export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-3">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
+      <Container className="flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center space-x-3">
           {/* ChatwayApp Logo */}
-          <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded flex items-center justify-center">
               <span className="text-white font-bold text-sm">C</span>
             </div>
             <span className="text-gray-700 font-medium">ChatwayApp</span>
-          </div>
+          </Link>
           
           {/* Divider */}
           <div className="w-px h-6 bg-gray-300"></div>
@@ -21,13 +23,8 @@ export default function Navbar() {
           {/* App Name */}
           <span className="text-gray-900 font-semibold">Chat</span>
         </div>
-
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
-          <div className="flex items-center space-x-1 cursor-pointer group">
-            <span className="text-gray-600 hover:text-gray-900">Products</span>
-            <ChevronDown className="w-4 h-4 text-gray-500 group-hover:text-gray-700" />
-          </div>
           
           <div className="flex items-center space-x-1 cursor-pointer group">
             <span className="text-gray-600 hover:text-gray-900">Features</span>
@@ -64,7 +61,7 @@ export default function Navbar() {
             Sign in
           </button>
         </div>
-      </div>
+      </Container>
     </nav>
   )
 }
