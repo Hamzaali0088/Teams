@@ -2,7 +2,8 @@ import React from 'react'
 import Container from '../../common/Container'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-
+import Header from '../../Ui/Header'
+    
 const featuresData = [
     {
         id: 1,
@@ -24,19 +25,12 @@ const featuresData = [
 
 export default function Features() {
     return (
-        <section className="py-16 relative">
+        <section id='features' className="py-16 relative">
             <div className='absolute top-0 left-0 w-[300px] rounded-full h-[300px] bg-purple-100 blur-3xl z-0' />
             <div className='absolute top-32 left-64 w-[300px] rounded-full h-[300px] bg-pink-100 blur-3xl z-0' />
             <div className='absolute top-64 left-0 w-[300px] rounded-full h-[300px] bg-yellow-50 blur-3xl z-0' />
             <Container className="relative z-10">
-                <div className="text-center mb-12">
-                    <p className="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-2">
-                        Featured News
-                    </p>
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                        Discover what's happening with Teams
-                    </h2>
-                </div>
+                <Header title="Featured News" description="Discover what's happening with Teams" />
 
                 <div className="grid md:grid-cols-2 gap-8">
                     {featuresData.map((feature) => (

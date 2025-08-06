@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import Container from './Container'
+import { Link as ScrollLink } from 'react-scroll'
 
 export default function ScrollNavbar() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('features')
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
       setIsScrolled(scrollTop > 50)
+      
+      // Update active section based on scroll position
+      const sections = ['features', 'solutions', 'products-and-services', 'customer-stories', 'get-started']
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          return rect.top <= 100 && rect.bottom >= 100
+        }
+        return false
+      })
+      
+      if (currentSection) {
+        setActiveSection(currentSection)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -15,11 +32,11 @@ export default function ScrollNavbar() {
   }, [])
 
   const navItems = [
-    { name: 'Featured news', active: true },
-    { name: 'Solutions', active: false },
-    { name: 'Products and services', active: false },
-    { name: 'Customer stories', active: false },
-    { name: 'Get started', active: false }
+    { name: 'Featured news', to: 'features' },
+    { name: 'Solutions', to: 'solutions' },
+    { name: 'Products and services', to: 'products-and-services' },
+    { name: 'Customer stories', to: 'customer-stories' },
+    { name: 'Get started', to: 'get-started' }
   ]
 
   return (
@@ -41,21 +58,29 @@ export default function ScrollNavbar() {
           {/* Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <div key={index} className="relative group cursor-pointer">
+              <ScrollLink 
+                to={item.to} 
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={500}
+                key={index} 
+                className="relative group cursor-pointer"
+              >
                 <span className={`text-sm font-medium transition-colors ${
-                  item.active 
+                  activeSection === item.to
                     ? 'text-purple-700' 
                     : 'text-gray-700 hover:text-purple-700'
                 }`}>
                   {item.name}
                 </span>
-                {item.active && (
+                {activeSection === item.to && (
                   <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-600 rounded-full"></div>
                 )}
-                {!item.active && (
+                {activeSection !== item.to && (
                   <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
                 )}
-              </div>
+              </ScrollLink>
             ))}
           </div>
 

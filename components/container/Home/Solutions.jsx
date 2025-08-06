@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Container from '../../common/Container'
-
+import Header from '../../Ui/Header'  
 export default function Solutions() {
   const [activeSection, setActiveSection] = useState('meet')
   const [slideDirection, setSlideDirection] = useState('right')
@@ -48,21 +48,15 @@ export default function Solutions() {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section id='solutions' className="py-20 bg-white">
       <Container className="">
+         {/* Header */}
+         <Header title="Solutions" description="Streamline communications—all in one place" />
+            
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Section - Text and Navigation */}
           <div className="space-y-8">
-            {/* Header */}
-            <div className="text-sm font-semibold text-purple-600 uppercase tracking-wider">
-              SOLUTIONS
-            </div>
-            
-            {/* Main Heading */}
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-              Streamline communications—all in one place
-            </h2>
-            
+           
             {/* Accordion/Navigation Menu */}
             <div className="space-y-1">
               {solutions.map((solution, index) => (

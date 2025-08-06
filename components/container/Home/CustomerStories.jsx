@@ -1,19 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
-
+import Header from '../../Ui/Header'
 export default function CustomerStories() {
   return (
-    <div className="bg-gray-50 py-16 px-4">
+    <div id='customer-stories' className="bg-gray-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide mb-2">
-            Customer Stories
-          </p>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            See how customers are innovating with Teams
-          </h2>
-        </div>
+        <Header title="Customer Stories" description="See how customers are innovating with Teams" />
 
         {/* Main Customer Story Card */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-12">

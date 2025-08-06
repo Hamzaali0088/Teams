@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Header from '../../Ui/Header'
 export default function GetStarted() {
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden">
+    <div id="get-started" className="relative min-h-screen bg-white overflow-hidden">
       {/* Background Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-orange-400 rounded-full opacity-20 blur-3xl"></div>
@@ -13,12 +13,7 @@ export default function GetStarted() {
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-sm text-gray-500 uppercase tracking-wider mb-4">GET STARTED</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
-            Take the next step with Teams
-          </h1>
-        </div>
+        <Header title="Get Started" description="Take the next step with Teams" />
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
