@@ -73,11 +73,9 @@ export default function Features() {
                         opacity: 1;
                     }
                 }
-                
                 .animate-slide-in {
                     animation: slideInFromBottom 0.8s ease-out forwards;
                 }
-                
                 @keyframes fadeInUp {
                     0% {
                         transform: translateY(40px);
@@ -88,16 +86,15 @@ export default function Features() {
                         opacity: 1;
                     }
                 }
-                
                 .animate-fade-in-up {
                     animation: fadeInUp 0.8s ease-out forwards;
                 }
             `}</style>
             
             <section id='features' className="py-16 relative">
-                <div className='absolute top-0 left-0 w-[300px] rounded-full h-[300px] bg-purple-100 blur-3xl z-0' />
-                <div className='absolute top-32 left-64 w-[300px] rounded-full h-[300px] bg-pink-100 blur-3xl z-0' />
-                <div className='absolute top-64 left-0 w-[300px] rounded-full h-[300px] bg-yellow-50 blur-3xl z-0' />
+                <div className='absolute top-0 left-0 w-[50px] md:w-[300px] rounded-full h-[50px] md:h-[300px] bg-purple-100 blur-3xl z-0' />
+                <div className='absolute top-32 left-64 w-[50px] md:w-[300px] rounded-full h-[50px] md:h-[300px] bg-pink-100 blur-3xl z-0' />
+                <div className='absolute top-64 left-0 w-[50px] md:w-[300px] rounded-full h-[50px] md:h-[300px] bg-yellow-50 blur-3xl z-0' />
                 <Container className="relative z-10">
                     <div ref={headerRef} className="opacity-0">
                         <Header title="Featured News" description="Discover what's happening with Teams" />
@@ -118,16 +115,16 @@ export default function Features() {
                                         className="object-cover transition-transform duration-700 hover:scale-110"
                                     />
                                 </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                                <div className="p-4 sm:p-6">
+                                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                                         {feature.title}
                                     </h3>
-                                    <p className="text-gray-600 mb-4 leading-relaxed">
+                                    <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 leading-relaxed">
                                         {feature.description}
                                     </p>
-                                    <button className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 hover:translate-x-1">
+                                    <button className="inline-flex items-center px-3 sm:px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 hover:translate-x-1 text-sm sm:text-base">
                                         {feature.buttonText}
-                                        <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                                     </button>
                                 </div>
                             </div>

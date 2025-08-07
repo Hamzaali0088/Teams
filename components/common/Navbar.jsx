@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false)
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-3 relative">
+    <nav className="bg-white border-b border-gray-200 border py-3 relative">
       <Container className="flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center space-x-3">
@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="w-px h-6 bg-gray-300"></div>
 
           {/* App Name */}
-          <span className="text-gray-900 font-semibold">Chat</span>
+          <span className="text-gray-900 font-semibold hidden lg:block">Chat</span>
         </div>
 
         {/* Navigation Links */}
@@ -99,7 +99,7 @@ export default function Navbar() {
 
         {/* Action Buttons */}
         <div className="flex items-center space-x-3">
-          <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
+          <button className="px-4 py-2 hidden lg:block border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
             Download App
           </button>
           <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">

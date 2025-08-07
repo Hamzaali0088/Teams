@@ -40,7 +40,7 @@ export default function ScrollNavbar() {
   ]
 
   return (
-    <nav className={` z-50 transition-all duration-300 ${
+    <nav className={` z-50 transition-all duration-300 hidden lg:block ${
       isScrolled 
         ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100' 
         : 'bg-white'

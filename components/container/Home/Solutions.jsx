@@ -5,6 +5,7 @@ import Header from '../../Ui/Header'
 
 export default function Solutions() {
   const [activeSection, setActiveSection] = useState('meet')
+  const [previousSection, setPreviousSection] = useState('meet')
   const [slideDirection, setSlideDirection] = useState('right')
   const [isAnimating, setIsAnimating] = useState(false)
   
@@ -72,6 +73,7 @@ export default function Solutions() {
     if (newSection !== activeSection && !isAnimating) {
       setIsAnimating(true)
       setSlideDirection('right')
+      setPreviousSection(activeSection)
       setActiveSection(newSection)
       
       // Reset animation state after transition completes
@@ -139,7 +141,7 @@ export default function Solutions() {
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-semibold text-gray-900 transition-colors duration-300">
+                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 transition-colors duration-300">
                           {solution.title}
                         </h3>
                         <span className={`text-gray-400 transition-transform duration-300 ${
@@ -152,16 +154,16 @@ export default function Solutions() {
                       <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
                         activeSection === solution.id ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                       }`}>
-                        <div className="mt-4 space-y-3">
-                          <p className="text-gray-600 leading-relaxed">
+                        <div className="mt-3 sm:mt-4 space-y-2 sm:space-y-3">
+                          <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                             {solution.description}
                           </p>
                           <a 
                             href="#" 
-                            className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors duration-300"
+                            className="inline-flex items-center text-sm sm:text-base text-purple-600 hover:text-purple-700 font-medium transition-colors duration-300"
                           >
                             Learn more
-                            <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="ml-2 w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
                           </a>
@@ -178,9 +180,10 @@ export default function Solutions() {
               <div className="relative w-full h-96 lg:h-[500px] overflow-hidden rounded-2xl shadow-2xl">
                 <Image
                   src={solutions.find(s => s.id === activeSection)?.image || '/st-images/meet.avif'}
+                  width={1500}
+                  height={1500}
                   alt={`${solutions.find(s => s.id === activeSection)?.title} solution`}
-                  fill
-                  className={`object-cover transition-all duration-700 ease-in-out transform ${
+                  className={`object-contain h-full w-auto transition-all duration-700 ease-in-out transform ${
                     isAnimating 
                       ? slideDirection === 'right' 
                         ? 'translate-x-full opacity-0' 
@@ -194,12 +197,10 @@ export default function Solutions() {
                   <Image
                     src={solutions.find(s => s.id !== activeSection)?.image || '/st-images/meet.avif'}
                     alt="Previous solution"
-                    fill
-                    className={`object-cover transition-all duration-700 ease-in-out transform absolute inset-0 ${
-                      slideDirection === 'right' 
-                        ? '-translate-x-full opacity-100' 
-                        : 'translate-x-0 opacity-0'
-                    }`}
+                    width={1500}
+                    height={1500}
+                    className={`object-contain transition-all hidden duration-700 w-full h-full ease-in-out transform absolute inset-0 border-amber-500`}
+                    
                   />
                 )}
               </div>

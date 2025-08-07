@@ -63,43 +63,43 @@ export default function CustomerStories() {
           </div>
 
           {/* Main Customer Story Card */}
-          <div ref={storyCardRef} className="bg-white rounded-2xl shadow-lg overflow-hidden mb-12 opacity-0 hover:shadow-xl transition-all duration-500">
-            <div className="grid md:grid-cols-2 gap-8 p-8">
+          <div ref={storyCardRef} className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8 sm:mb-12 opacity-0 hover:shadow-xl transition-all duration-500">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 p-6 sm:p-8">
               {/* Left Section - Text Content */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Company Logo */}
                 <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-red-500 rounded-lg flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                    <span className="text-white font-bold text-sm">GN</span>
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-orange-400 to-red-500 rounded-lg flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                    <span className="text-white font-bold text-xs sm:text-sm">GN</span>
                   </div>
-                  <span className="text-xl font-semibold text-gray-900">GoNarrative</span>
+                  <span className="text-lg sm:text-xl font-semibold text-gray-900">GoNarrative</span>
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-2xl font-bold text-gray-900 leading-tight">
+                <blockquote className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
                   "Without a doubt, the fluid collaboration that Teams enables has a positive impact on our ability to be responsive and focus on the work to be done"
                 </blockquote>
 
                 {/* Attribution */}
-                <p className="text-gray-600">
+                <p className="text-sm sm:text-base text-gray-600">
                   Matthew Woodget, CEO of Go Narrative
                 </p>
 
                 {/* Products */}
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-gray-900">Products</h4>
+                <div className="space-y-2 sm:space-y-3">
+                  <h4 className="font-semibold text-gray-900 text-sm sm:text-base">Products</h4>
                   <div className="flex items-center space-x-2">
-                    <div className="w-6 h-6 bg-purple-600 rounded flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-600 rounded flex items-center justify-center transition-transform duration-300 hover:scale-110">
                       <span className="text-white font-bold text-xs">T</span>
                     </div>
-                    <span className="text-gray-900">Teams</span>
+                    <span className="text-sm sm:text-base text-gray-900">Teams</span>
                   </div>
                 </div>
 
                 {/* Read Story Button */}
-                <button className="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:translate-x-1 flex items-center">
+                <button className="bg-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 hover:translate-x-1 flex items-center text-sm sm:text-base">
                   Read the story
-                  <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-2 w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
@@ -124,33 +124,33 @@ export default function CustomerStories() {
           </div>
 
           {/* Company Logos Section */}
-          <div ref={logosRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-0">
+          <div ref={logosRef} className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 opacity-0">
             {/* GoNarrative */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
+            <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
               <div className="flex items-center space-x-2">
-                <div className="w-6 h-6 bg-gradient-to-r from-orange-400 to-red-500 rounded flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-orange-400 to-red-500 rounded flex items-center justify-center transition-transform duration-300 hover:scale-110">
                   <span className="text-white font-bold text-xs">GN</span>
                 </div>
-                <span className="text-sm font-semibold text-gray-900">GoNarrative</span>
+                <span className="text-xs sm:text-sm font-semibold text-gray-900">GoNarrative</span>
               </div>
             </div>
 
             {/* ABN AMRO */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
+            <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
               <div className="text-center">
-                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded mx-auto mb-1 transition-transform duration-300 hover:scale-110"></div>
-                <span className="text-sm font-semibold text-gray-900">ABN AMRO</span>
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded mx-auto mb-1 transition-transform duration-300 hover:scale-110"></div>
+                <span className="text-xs sm:text-sm font-semibold text-gray-900">ABN AMRO</span>
               </div>
             </div>
 
             {/* Berryessa Gap Vineyards */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <span className="text-sm font-semibold text-gray-900 text-center">BERRYESSA GAP VINEYARDS</span>
+            <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <span className="text-xs sm:text-sm font-semibold text-gray-900 text-center">BERRYESSA GAP VINEYARDS</span>
             </div>
 
             {/* L'ORÉAL */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <span className="text-sm font-semibold text-gray-900">L'ORÉAL</span>
+            <div className="bg-white rounded-lg border border-gray-200 p-3 sm:p-4 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <span className="text-xs sm:text-sm font-semibold text-gray-900">L'ORÉAL</span>
             </div>
           </div>
         </div>

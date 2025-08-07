@@ -68,7 +68,7 @@ export default function Hero() {
                             <div className='max-w-2xl'>
                                 <h1 
                                     ref={titleRef}
-                                    className='text-5xl md:text-6xl font-medium text-gray-900 leading-tight mb-6 opacity-0'
+                                    className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 leading-tight mb-4 sm:mb-6 opacity-0'
                                 >
                                     Get ready for the future<br />
                                     of work with Microsoft<br />
@@ -76,13 +76,13 @@ export default function Hero() {
                                 </h1>
                                 <p 
                                     ref={descriptionRef}
-                                    className='text-lg md:text-xl text-gray-700 mb-8 leading-relaxed opacity-0 slide-in-delay-1'
+                                    className='text-base sm:text-lg md:text-xl text-gray-700 mb-6 sm:mb-8 leading-relaxed opacity-0 slide-in-delay-1'
                                 >
                                     Transform the way you work with next-generation AI capabilities and bring together your physical and digital worlds.
                                 </p>
                                 <button 
                                     ref={buttonRef}
-                                    className='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 opacity-0 slide-in-delay-2'
+                                    className='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-lg transition-all duration-200 opacity-0 slide-in-delay-2 text-sm sm:text-base'
                                 >
                                     Download now
                                 </button>

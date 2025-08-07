@@ -288,7 +288,7 @@ export default function ProductAndServices() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 ${
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 text-sm sm:text-base ${
                     activeTab === tab.id
                       ? 'bg-purple-600 text-white shadow-lg'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -317,14 +317,14 @@ export default function ProductAndServices() {
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-transparent"></div>
                 
                 {/* Content Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">{featuredSolution?.title || "Featured Solution"}</h3>
-                  <p className="text-gray-200 mb-4 text-sm">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">{featuredSolution?.title || "Featured Solution"}</h3>
+                  <p className="text-gray-200 mb-3 sm:mb-4 text-xs sm:text-sm">
                     {featuredSolution?.description || "Discover our featured solution for your needs."}
                   </p>
-                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center hover:translate-x-1">
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-all duration-300 flex items-center hover:translate-x-1 text-sm sm:text-base">
                     Learn more
-                    <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="ml-2 w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -339,25 +339,25 @@ export default function ProductAndServices() {
                   <div
                     key={solution.id}
                     ref={el => gridCardsRef.current[index] = el}
-                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 group border border-gray-100 opacity-0 hover:scale-105"
+                    className="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-500 group border border-gray-100 opacity-0 hover:scale-105"
                   >
                     {/* Icon */}
-                    <div className="text-3xl mb-4 transition-transform duration-300 group-hover:scale-110">{solution.icon}</div>
+                    <div className="text-2xl sm:text-3xl mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-110">{solution.icon}</div>
                     
                     {/* Title */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-purple-600 transition-colors duration-300">
                       {solution.title}
                     </h3>
                     
                     {/* Description */}
-                    <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 leading-relaxed">
                       {solution.description}
                     </p>
                     
                     {/* Button */}
-                    <button className="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center group hover:translate-x-1">
+                    <button className="w-full bg-purple-600 hover:bg-purple-700 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center group hover:translate-x-1 text-sm sm:text-base">
                       Learn more
-                      <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="ml-2 w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>

@@ -14,7 +14,7 @@ export default function index() {
     <>
       <Navbar />
       <Hero />
-      <div className='relative'>
+    <div className='relative'>
         <div className='sticky top-0 left-0 w-full z-50'>
           <ScrollNavbar  />
         </div>
@@ -23,7 +23,7 @@ export default function index() {
         <ProductAndServices />
         <CustomerStories />
       </div>
-      <GetStarted />
+      <GetStarted /> 
       <Footer />
     </>
   )
