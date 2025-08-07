@@ -2,75 +2,10 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { ChevronDown, MessageCircle, Video, Users, Smartphone, AppWindow, Building } from 'lucide-react'
 import Container from '../common/Container'
+import { navigationData } from '../../src/data/featuresPages'
 
 export default function Navbar() {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false)
-
-  const featuresMenu = [
-    {
-      title: "Meetings and conferencing",
-      icon: Video,
-      items: [
-        { name: "Online meetings", href: "/features/online-meetings" },
-        { name: "Video conferencing", href: "/features/video-conferencing" },
-        { name: "Screen sharing", href: "/features/screen-sharing" },
-        { name: "Custom backgrounds", href: "/features/custom-backgrounds" },
-        { name: "Webinars", href: "/features/webinars" },
-        { name: "Accessibility", href: "/features/accessibility" },
-        { name: "Town hall", href: "/features/town-hall" }
-      ]
-    },
-    {
-      title: "Teams Phone",
-      icon: Smartphone,
-      items: [
-        { name: "Teams Phone", href: "/features/teams-phone" },
-        { name: "VOIP", href: "/features/voip" },
-        { name: "PBX", href: "/features/pbx" },
-        { name: "Video calling", href: "/features/video-calling" },
-        { name: "Business phones", href: "/features/business-phones" },
-        { name: "Contact Center", href: "/features/contact-center" }
-      ]
-    },
-    {
-      title: "Chat and collaboration",
-      icon: MessageCircle,
-      items: [
-        { name: "AI in Teams", href: "/features/ai-in-teams" },
-        { name: "Instant messaging", href: "/features/instant-messaging" },
-        { name: "File sharing", href: "/features/file-sharing" },
-        { name: "Collaboration", href: "/features/collaboration" },
-        { name: "Chat", href: "/features/chat" }
-      ]
-    },
-    {
-      title: "Devices",
-      icon: Smartphone,
-      items: [
-        { name: "Teams Devices", href: "/features/teams-devices" },
-        { name: "Teams Rooms", href: "/features/teams-rooms" }
-      ]
-    },
-    {
-      title: "Apps",
-      icon: AppWindow,
-      items: [
-        { name: "Apps and workflows", href: "/features/apps-and-workflows" },
-        { name: "Meeting apps", href: "/features/meeting-apps" },
-        { name: "Microsoft Mesh", href: "/features/microsoft-mesh" },
-        { name: "Microsoft Places", href: "/features/microsoft-places" }
-      ]
-    },
-    {
-      title: "Business and management",
-      icon: Building,
-      items: [
-        { name: "Workforce management", href: "/features/workforce-management" },
-        { name: "Staffing/scheduling", href: "/features/staffing-scheduling" },
-        { name: "Hot Desking", href: "/features/hot-desking" }
-      ]
-    }
-  ]
 
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-3 relative">
@@ -114,7 +49,7 @@ export default function Navbar() {
                 <div className='border  bg-white rounded-lg shadow-xl border-gray-200  '>
                   <div className="p-6">
                     <div className="grid grid-cols-3 gap-8">
-                      {featuresMenu.map((section, index) => (
+                      {navigationData.features.map((section, index) => (
                         <div key={index} className="space-y-4">
                           <div className="flex items-center space-x-2">
                             <section.icon className="w-5 h-5 text-blue-600" />

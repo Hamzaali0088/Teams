@@ -6,7 +6,274 @@ import DynamicFAQ from '../../components/container/Features/DynamicFAQ'
 import DynamicGetStarted from '../../components/container/Features/DynamicGetStarted'
 
 // Icons for features
-import { Monitor, Users, Shield, Zap, Eye, Share2, Settings, BarChart3, Video, MessageCircle, Phone, FileText, TrendingUp, Globe, Clock, DollarSign, Target, CheckCircle, Lock, Wifi, Smartphone, Tablet, Search } from 'lucide-react'
+import { Monitor, Users, Shield, Zap, Eye, Share2, Settings, BarChart3, Video, MessageCircle, Phone, FileText, TrendingUp, Globe, Clock, DollarSign, Target, CheckCircle, Lock, Wifi, Smartphone, Tablet, Search, Building } from 'lucide-react'
+
+// Navigation data structure
+export const navigationData = {
+  features: [
+    {
+      title: "Meetings and conferencing",
+      icon: Video,
+      items: [
+        { name: "Online meetings", href: "/online-meetings", slug: "online-meetings" },
+        { name: "Video conferencing", href: "/video-conferencing", slug: "video-conferencing" },
+        { name: "Screen sharing", href: "/screen-sharing", slug: "screen-sharing" },
+        { name: "Custom backgrounds", href: "/custom-backgrounds", slug: "custom-backgrounds" },
+        { name: "Webinars", href: "/webinars", slug: "webinars" },
+        { name: "Accessibility", href: "/accessibility", slug: "accessibility" },
+        { name: "Town hall", href: "/town-hall", slug: "town-hall" }
+      ]
+    },
+    {
+      title: "Teams Phone",
+      icon: Smartphone,
+      items: [
+        { name: "Teams Phone", href: "/teams-phone", slug: "teams-phone" },
+        { name: "VOIP", href: "/voip", slug: "voip" },
+        { name: "PBX", href: "/pbx", slug: "pbx" },
+        { name: "Video calling", href: "/video-calling", slug: "video-calling" },
+        { name: "Business phones", href: "/business-phones", slug: "business-phones" },
+        { name: "Contact Center", href: "/contact-center", slug: "contact-center" }
+      ]
+    },
+    {
+      title: "Chat and collaboration",
+      icon: MessageCircle,
+      items: [
+        { name: "AI in Teams", href: "/ai-in-teams", slug: "ai-in-teams" },
+        { name: "Instant messaging", href: "/instant-messaging", slug: "instant-messaging" },
+        { name: "File sharing", href: "/file-sharing", slug: "file-sharing" },
+        { name: "Collaboration", href: "/collaboration", slug: "collaboration" },
+        { name: "Chat", href: "/chat", slug: "chat" }
+      ]
+    },
+    {
+      title: "Devices",
+      icon: Smartphone,
+      items: [
+        { name: "Teams Devices", href: "/teams-devices", slug: "teams-devices" },
+        { name: "Teams Rooms", href: "/teams-rooms", slug: "teams-rooms" }
+      ]
+    },
+    {
+      title: "Apps",
+      icon: Monitor,
+      items: [
+        { name: "Apps and workflows", href: "/apps-and-workflows", slug: "apps-and-workflows" },
+        { name: "Meeting apps", href: "/meeting-apps", slug: "meeting-apps" },
+        { name: "Microsoft Mesh", href: "/microsoft-mesh", slug: "microsoft-mesh" },
+        { name: "Microsoft Places", href: "/microsoft-places", slug: "microsoft-places" }
+      ]
+    },
+    {
+      title: "Business and management",
+      icon: Building,
+      items: [
+        { name: "Workforce management", href: "/workforce-management", slug: "workforce-management" },
+        { name: "Staffing/scheduling", href: "/staffing-scheduling", slug: "staffing-scheduling" },
+        { name: "Hot Desking", href: "/hot-desking", slug: "hot-desking" }
+      ]
+    }
+  ]
+}
+
+// Function to get all valid feature slugs
+export const getAllFeatureSlugs = () => {
+  const slugs = []
+  navigationData.features.forEach(category => {
+    category.items.forEach(item => {
+      slugs.push(item.slug)
+    })
+  })
+  return slugs
+}
+
+// Function to get feature data by slug
+export const getFeatureDataBySlug = (slug) => {
+  for (const category of navigationData.features) {
+    const item = category.items.find(item => item.slug === slug)
+    if (item) {
+      return item
+    }
+  }
+  return null
+}
+
+// Function to generate placeholder data for features that don't have content yet
+export const generatePlaceholderFeatureData = (slug, title) => {
+  return {
+    sections: [
+      {
+        component: DynamicHero,
+        props: {
+          bannerText: `New ${title} Premium - AI-powered features for intelligent collaboration`,
+          title: title,
+          subtitle: `Experience the power of ${title.toLowerCase()} with advanced features, seamless integration, and professional tools designed for modern teams.`,
+          primaryCtaText: "Get Started",
+          secondaryCtaText: "Watch Demo",
+          stats: [
+            { value: "10M+", label: "Users" },
+            { value: "99.9%", label: "Reliability" },
+            { value: "24/7", label: "Support" },
+            { value: "Global", label: "Reach" }
+          ]
+        }
+      },
+      {
+        component: DynamicFeatures,
+        props: {
+          title: "Express More with",
+          subtitle: `Transform your workflow with powerful ${title.toLowerCase()} features designed for modern teams and professionals.`,
+          features: [
+            {
+              icon: Zap,
+              title: "Lightning Fast",
+              description: "Experience blazing-fast performance with optimized algorithms and cloud infrastructure."
+            },
+            {
+              icon: Shield,
+              title: "Enterprise Security",
+              description: "Bank-level encryption and security features to protect your data and communications."
+            },
+            {
+              icon: Users,
+              title: "Team Collaboration",
+              description: "Work together seamlessly with real-time collaboration tools and shared workspaces."
+            },
+            {
+              icon: Settings,
+              title: "Advanced Controls",
+              description: "Customize your experience with powerful settings and configuration options."
+            },
+            {
+              icon: BarChart3,
+              title: "Analytics & Insights",
+              description: "Track performance and gain insights with detailed analytics and reporting."
+            },
+            {
+              icon: CheckCircle,
+              title: "Easy Integration",
+              description: "Integrate seamlessly with your existing tools and workflows."
+            }
+          ],
+          demoTitle: `See ${title} in Action`,
+          demoDescription: `Experience the power of our ${title.toLowerCase()} technology with this interactive demo.`,
+          demoFeatures: ["Advanced features", "Seamless integration", "Professional tools"]
+        }
+      },
+      {
+        component: DynamicBenefits,
+        props: {
+          title: `How ${title} Can`,
+          subtitle: `Discover the powerful benefits that ${title.toLowerCase()} brings to modern businesses and how it can revolutionize your workflow.`,
+          benefits: [
+            {
+              icon: TrendingUp,
+              title: "Increased Productivity",
+              description: "Streamline your workflow and boost team productivity with efficient tools and automation."
+            },
+            {
+              icon: Globe,
+              title: "Global Reach",
+              description: "Connect with team members and clients worldwide without geographical limitations."
+            },
+            {
+              icon: Users,
+              title: "Better Collaboration",
+              description: "Improve team collaboration with real-time communication and shared resources."
+            },
+            {
+              icon: Clock,
+              title: "Time Savings",
+              description: "Save valuable time with automated processes and efficient workflows."
+            },
+            {
+              icon: DollarSign,
+              title: "Cost Reduction",
+              description: "Reduce operational costs while maintaining high-quality service and features."
+            },
+            {
+              icon: Target,
+              title: "Improved Outcomes",
+              description: "Achieve better results with data-driven insights and optimized processes."
+            }
+          ],
+          statsTitle: `${title} Impact`,
+          statsSubtitle: "Real numbers from businesses using our technology",
+          useCasesTitle: "Popular Use Cases",
+          useCases: [
+            { title: "Team Collaboration", description: "Enhance team collaboration with shared tools and real-time communication." },
+            { title: "Project Management", description: "Manage projects efficiently with integrated tools and automated workflows." },
+            { title: "Client Communication", description: "Improve client communication with professional tools and seamless integration." },
+            { title: "Remote Work", description: "Support remote work with cloud-based tools and mobile accessibility." },
+            { title: "Business Operations", description: "Streamline business operations with automated processes and analytics." },
+            { title: "Data Management", description: "Manage data effectively with secure storage and advanced analytics." }
+          ]
+        }
+      },
+      {
+        component: DynamicFAQ,
+        props: {
+          subtitle: `Get answers to common questions about ${title.toLowerCase()} technology, features, and how it can benefit your team.`,
+          faqs: [
+            {
+              question: `What is ${title}?`,
+              answer: `${title} is a powerful tool designed to enhance your workflow and improve team collaboration with advanced features and seamless integration.`
+            },
+            {
+              question: "How secure is the platform?",
+              answer: "Our platform uses enterprise-grade encryption and security features to protect your data and ensure privacy."
+            },
+            {
+              question: "Can I integrate with other tools?",
+              answer: "Yes, our platform offers seamless integration with popular tools and services to enhance your workflow."
+            },
+            {
+              question: "What devices are supported?",
+              answer: "Our platform works across all major devices including desktop computers, laptops, tablets, and smartphones."
+            },
+            {
+              question: "Is there a free trial available?",
+              answer: "Yes, we offer a free trial so you can experience the full power of our platform before making a decision."
+            }
+          ]
+        }
+      },
+      {
+        component: DynamicGetStarted,
+        props: {
+          title: `Get Started with ${title} Today`,
+          subtitle: "Join thousands of users who are already transforming their workflow with our powerful technology.",
+          mainCtaTitle: "Ready to Get Started?",
+          mainCtaSubtitle: "Download our app and begin your journey in minutes",
+          primaryCtaText: "Download App",
+          platforms: [
+            {
+              icon: Monitor,
+              name: "Desktop",
+              description: "Windows, macOS, Linux",
+              features: ["Full features", "Advanced controls", "Desktop optimization"]
+            },
+            {
+              icon: Smartphone,
+              name: "Mobile",
+              description: "iOS, Android",
+              features: ["Mobile optimized", "Touch controls", "Push notifications"]
+            },
+            {
+              icon: Tablet,
+              name: "Tablet",
+              description: "iPad, Android tablets",
+              features: ["Large screen support", "Touch controls", "Portrait mode"]
+            }
+          ],
+          finalCtaTitle: "Transform Your Workflow Today",
+          finalCtaSubtitle: "Experience the power of seamless integration and take your productivity to the next level"
+        }
+      }
+    ]
+  }
+}
 
 export const featuresPagesData = {
   'screen-sharing': {
@@ -736,5 +1003,521 @@ export const featuresPagesData = {
         }
       }
     ]
-  }
+  },
+  'custom-backgrounds': {
+    sections: [
+      {
+        component: DynamicHero,
+        props: {
+          bannerText: "New Custom Backgrounds Premium - AI-powered backgrounds for professional meetings",
+          title: "Custom Backgrounds",
+          subtitle: "Transform your video calls with professional, AI-powered custom backgrounds that enhance your presence and maintain privacy.",
+          primaryCtaText: "Try Backgrounds",
+          secondaryCtaText: "Watch Demo",
+          stats: [
+            { value: "1000+", label: "Backgrounds" },
+            { value: "AI", label: "Powered" },
+            { value: "99.9%", label: "Reliability" },
+            { value: "24/7", label: "Support" }
+          ]
+        }
+      },
+      {
+        component: DynamicFeatures,
+        props: {
+          title: "Express More with",
+          subtitle: "Transform your video calls with powerful custom background features designed for modern professionals.",
+          features: [
+            {
+              icon: Eye,
+              title: "AI Background Removal",
+              description: "Advanced AI technology automatically removes and replaces your background with professional alternatives."
+            },
+            {
+              icon: Settings,
+              title: "Custom Uploads",
+              description: "Upload your own images or company logos to create personalized backgrounds for your brand."
+            },
+            {
+              icon: Shield,
+              title: "Privacy Protection",
+              description: "Keep your personal space private with automatic background blurring and replacement."
+            },
+            {
+              icon: Zap,
+              title: "Real-time Processing",
+              description: "Instant background changes with no lag or delay during your video calls."
+            },
+            {
+              icon: Users,
+              title: "Professional Appearance",
+              description: "Maintain a professional appearance regardless of your physical environment."
+            },
+            {
+              icon: CheckCircle,
+              title: "Easy Setup",
+              description: "One-click background selection and automatic optimization for your lighting conditions."
+            }
+          ],
+          demoTitle: "See Custom Backgrounds in Action",
+          demoDescription: "Experience the power of our custom background technology with this interactive demo.",
+          demoFeatures: ["AI background removal", "Custom uploads", "Real-time processing"]
+        }
+      },
+      {
+        component: DynamicBenefits,
+        props: {
+          title: "How Custom Backgrounds Can",
+          subtitle: "Discover the powerful benefits that custom backgrounds bring to modern professionals and how they can enhance your video presence.",
+          benefits: [
+            {
+              icon: TrendingUp,
+              title: "Professional Image",
+              description: "Maintain a professional appearance regardless of your physical environment or location."
+            },
+            {
+              icon: Shield,
+              title: "Privacy Protection",
+              description: "Keep your personal space private and protect sensitive information visible in your background."
+            },
+            {
+              icon: Users,
+              title: "Brand Consistency",
+              description: "Use company-branded backgrounds to maintain consistent brand presence across all video calls."
+            },
+            {
+              icon: Target,
+              title: "Better Focus",
+              description: "Eliminate distractions and keep participants focused on your content and message."
+            },
+            {
+              icon: CheckCircle,
+              title: "Confidence Boost",
+              description: "Feel more confident and professional during important video calls and presentations."
+            },
+            {
+              icon: Globe,
+              title: "Global Accessibility",
+              description: "Join professional meetings from anywhere while maintaining a consistent, professional appearance."
+            }
+          ],
+          statsTitle: "Custom Backgrounds Impact",
+          statsSubtitle: "Real numbers from professionals using our custom background technology",
+          useCasesTitle: "Popular Use Cases",
+          useCases: [
+            { title: "Remote Work", description: "Maintain professional appearance while working from home or remote locations." },
+            { title: "Client Meetings", description: "Use branded backgrounds for client presentations and meetings." },
+            { title: "Job Interviews", description: "Create a professional environment for remote job interviews." },
+            { title: "Team Meetings", description: "Use consistent backgrounds for internal team meetings and presentations." },
+            { title: "Webinars", description: "Enhance webinar presentations with professional, branded backgrounds." },
+            { title: "Sales Calls", description: "Maintain professional appearance during sales calls and demos." }
+          ]
+        }
+      },
+      {
+        component: DynamicFAQ,
+        props: {
+          subtitle: "Get answers to common questions about custom backgrounds, features, and how they can enhance your video calls.",
+          faqs: [
+            {
+              question: "What are custom backgrounds?",
+              answer: "Custom backgrounds are virtual backgrounds that replace your real background during video calls. They can be professional images, company logos, or any image you choose to upload."
+            },
+            {
+              question: "How does AI background removal work?",
+              answer: "Our AI technology analyzes your video feed in real-time, identifies your person, and automatically removes the background, replacing it with your chosen custom background."
+            },
+            {
+              question: "Can I upload my own backgrounds?",
+              answer: "Yes, you can upload your own images, company logos, or any image you want to use as a background. We support common image formats like JPG, PNG, and GIF."
+            },
+            {
+              question: "Do custom backgrounds work on all devices?",
+              answer: "Custom backgrounds work on desktop computers and laptops. Mobile devices may have limited support depending on the device capabilities and operating system."
+            },
+            {
+              question: "Are custom backgrounds secure?",
+              answer: "Yes, all background processing happens locally on your device, and we don't store or transmit your background images to our servers."
+            }
+          ]
+        }
+      },
+      {
+        component: DynamicGetStarted,
+        props: {
+          title: "Get Started with Custom Backgrounds Today",
+          subtitle: "Join millions of professionals who are already enhancing their video presence with our powerful custom background technology.",
+          mainCtaTitle: "Ready to Transform Your Background?",
+          mainCtaSubtitle: "Download our app and start using custom backgrounds in minutes",
+          primaryCtaText: "Download App",
+          platforms: [
+            {
+              icon: Monitor,
+              name: "Desktop",
+              description: "Windows, macOS, Linux",
+              features: ["Full background features", "Custom uploads", "AI processing"]
+            },
+            {
+              icon: Smartphone,
+              name: "Mobile",
+              description: "iOS, Android",
+              features: ["Basic backgrounds", "Built-in options", "Touch controls"]
+            },
+            {
+              icon: Tablet,
+              name: "Tablet",
+              description: "iPad, Android tablets",
+              features: ["Large screen support", "Touch controls", "Portrait mode"]
+            }
+          ],
+          finalCtaTitle: "Transform Your Video Presence Today",
+          finalCtaSubtitle: "Experience the power of professional custom backgrounds and take your video calls to the next level"
+        }
+      }
+    ]
+  },
+  'webinars': {
+    sections: [
+      {
+        component: DynamicHero,
+        props: {
+          bannerText: "New Webinars Premium - AI-powered hosting for intelligent webinars",
+          title: "Webinars",
+          subtitle: "Host professional webinars with advanced features, interactive tools, and seamless audience engagement for up to 10,000 participants.",
+          primaryCtaText: "Start Webinar",
+          secondaryCtaText: "Watch Demo",
+          stats: [
+            { value: "10K+", label: "Participants" },
+            { value: "4K", label: "Quality" },
+            { value: "99.9%", label: "Reliability" },
+            { value: "24/7", label: "Support" }
+          ]
+        }
+      },
+      {
+        component: DynamicFeatures,
+        props: {
+          title: "Express More with",
+          subtitle: "Transform your webinars with powerful hosting features designed for modern businesses and educators.",
+          features: [
+            {
+              icon: Users,
+              title: "Large Audience Support",
+              description: "Host webinars with up to 10,000 participants with advanced moderation and management tools."
+            },
+            {
+              icon: Video,
+              title: "HD Video Quality",
+              description: "Crystal clear video with adaptive quality that works perfectly for large audiences."
+            },
+            {
+              icon: Shield,
+              title: "Secure Webinars",
+              description: "Bank-level encryption and security features to protect your webinar content."
+            },
+            {
+              icon: BarChart3,
+              title: "Advanced Analytics",
+              description: "Track attendance, engagement, and webinar effectiveness with detailed analytics."
+            },
+            {
+              icon: Settings,
+              title: "Moderation Tools",
+              description: "Advanced moderation tools to manage large audiences and maintain webinar quality."
+            },
+            {
+              icon: CheckCircle,
+              title: "Recording & Playback",
+              description: "Record your webinars automatically with cloud storage and easy sharing capabilities."
+            }
+          ],
+          demoTitle: "See Webinars in Action",
+          demoDescription: "Experience the power of our webinar technology with this interactive demo.",
+          demoFeatures: ["Large audience support", "HD video quality", "Advanced analytics"]
+        }
+      },
+      {
+        component: DynamicBenefits,
+        props: {
+          title: "How Webinars Can",
+          subtitle: "Discover the powerful benefits that webinars bring to modern businesses and how they can revolutionize your audience engagement.",
+          benefits: [
+            {
+              icon: TrendingUp,
+              title: "Increased Reach",
+              description: "Reach thousands of participants simultaneously without geographical limitations."
+            },
+            {
+              icon: Globe,
+              title: "Global Audience",
+              description: "Connect with audiences worldwide and expand your reach beyond local markets."
+            },
+            {
+              icon: Users,
+              title: "Better Engagement",
+              description: "Interactive features and visual content improve audience engagement and retention."
+            },
+            {
+              icon: DollarSign,
+              title: "Cost Savings",
+              description: "Eliminate venue costs, travel expenses, and infrastructure costs while reaching larger audiences."
+            },
+            {
+              icon: Target,
+              title: "Lead Generation",
+              description: "Generate leads and build your audience through professional webinar presentations."
+            },
+            {
+              icon: BarChart3,
+              title: "Measurable Results",
+              description: "Track attendance, engagement, and conversion rates with detailed analytics."
+            }
+          ],
+          statsTitle: "Webinar Impact",
+          statsSubtitle: "Real numbers from businesses using our webinar technology",
+          useCasesTitle: "Popular Use Cases",
+          useCases: [
+            { title: "Product Launches", description: "Launch new products to large audiences with interactive demonstrations." },
+            { title: "Training Programs", description: "Conduct training sessions for employees, partners, or customers." },
+            { title: "Thought Leadership", description: "Establish thought leadership through educational and informative webinars." },
+            { title: "Sales Presentations", description: "Present to prospects and customers with interactive sales content." },
+            { title: "Educational Content", description: "Share educational content and knowledge with your audience." },
+            { title: "Customer Onboarding", description: "Onboard new customers with comprehensive product training webinars." }
+          ]
+        }
+      },
+      {
+        component: DynamicFAQ,
+        props: {
+          subtitle: "Get answers to common questions about webinar technology, features, and how it can benefit your business.",
+          faqs: [
+            {
+              question: "What is a webinar?",
+              answer: "A webinar is a web-based seminar that allows you to present to a large audience online. It combines video, audio, and interactive features to engage participants remotely."
+            },
+            {
+              question: "How many people can attend a webinar?",
+              answer: "You can host webinars with up to 10,000 participants depending on your plan. Free users can host webinars with up to 1,000 participants."
+            },
+            {
+              question: "Can I record webinars?",
+              answer: "Yes, you can record your webinars for later viewing, sharing, or repurposing. Recordings are saved securely and can be shared with participants."
+            },
+            {
+              question: "What features are available for webinars?",
+              answer: "Webinar features include HD video, screen sharing, audience polls, Q&A sessions, chat functionality, and advanced analytics."
+            },
+            {
+              question: "Is webinar hosting secure?",
+              answer: "Our webinar platform uses enterprise-grade encryption and security features. You can set passwords, waiting rooms, and control participant access."
+            }
+          ]
+        }
+      },
+      {
+        component: DynamicGetStarted,
+        props: {
+          title: "Get Started with Webinars Today",
+          subtitle: "Join thousands of businesses who are already transforming their audience engagement with our powerful webinar technology.",
+          mainCtaTitle: "Ready to Host Your First Webinar?",
+          mainCtaSubtitle: "Download our app and begin your first webinar in minutes",
+          primaryCtaText: "Download App",
+          platforms: [
+            {
+              icon: Monitor,
+              name: "Desktop",
+              description: "Windows, macOS, Linux",
+              features: ["Full webinar features", "Screen sharing", "Advanced controls"]
+            },
+            {
+              icon: Smartphone,
+              name: "Mobile",
+              description: "iOS, Android",
+              features: ["Mobile viewing", "Touch controls", "Push notifications"]
+            },
+            {
+              icon: Tablet,
+              name: "Tablet",
+              description: "iPad, Android tablets",
+              features: ["Large screen support", "Touch controls", "Portrait mode"]
+            }
+          ],
+          finalCtaTitle: "Transform Your Audience Engagement Today",
+          finalCtaSubtitle: "Experience the power of seamless webinars and take your audience engagement to the next level"
+        }
+      }
+    ]
+  },
+  'file-sharing': {
+    sections: [
+      {
+        component: DynamicHero,
+        props: {
+          bannerText: "New File Sharing Premium - AI-powered collaboration for intelligent file management",
+          title: "File Sharing",
+          subtitle: "Share files securely and collaborate in real-time with advanced features, version control, and seamless integration across all devices.",
+          primaryCtaText: "Start Sharing",
+          secondaryCtaText: "Watch Demo",
+          stats: [
+            { value: "1TB+", label: "Files Shared" },
+            { value: "Real-time", label: "Sync" },
+            { value: "99.9%", label: "Reliability" },
+            { value: "24/7", label: "Support" }
+          ]
+        }
+      },
+      {
+        component: DynamicFeatures,
+        props: {
+          title: "Express More with",
+          subtitle: "Transform your file sharing with powerful collaboration features designed for modern teams and professionals.",
+          features: [
+            {
+              icon: FileText,
+              title: "Secure File Sharing",
+              description: "Share files securely with end-to-end encryption and advanced access controls."
+            },
+            {
+              icon: Users,
+              title: "Real-time Collaboration",
+              description: "Collaborate on files in real-time with multiple team members simultaneously."
+            },
+            {
+              icon: Shield,
+              title: "Version Control",
+              description: "Track file versions and changes with automatic backup and recovery."
+            },
+            {
+              icon: Zap,
+              title: "Instant Sync",
+              description: "Files sync instantly across all devices with cloud storage integration."
+            },
+            {
+              icon: Search,
+              title: "Advanced Search",
+              description: "Find any file instantly with powerful search capabilities and filters."
+            },
+            {
+              icon: Settings,
+              title: "Access Controls",
+              description: "Set permissions and control who can view, edit, or share your files."
+            }
+          ],
+          demoTitle: "See File Sharing in Action",
+          demoDescription: "Experience the power of our file sharing technology with this interactive demo.",
+          demoFeatures: ["Secure sharing", "Real-time collaboration", "Version control"]
+        }
+      },
+      {
+        component: DynamicBenefits,
+        props: {
+          title: "How File Sharing Can",
+          subtitle: "Discover the powerful benefits that file sharing brings to modern teams and how it can revolutionize your collaboration.",
+          benefits: [
+            {
+              icon: TrendingUp,
+              title: "Increased Productivity",
+              description: "Efficient file sharing eliminates delays and enables faster collaboration, boosting team productivity."
+            },
+            {
+              icon: Globe,
+              title: "Global Collaboration",
+              description: "Share files with team members worldwide instantly, regardless of location or time zone."
+            },
+            {
+              icon: Users,
+              title: "Better Communication",
+              description: "File sharing improves communication by providing easy access to shared resources and documents."
+            },
+            {
+              icon: Clock,
+              title: "Time Savings",
+              description: "Save time with instant file sharing and real-time collaboration capabilities."
+            },
+            {
+              icon: DollarSign,
+              title: "Cost Reduction",
+              description: "Reduce storage costs and eliminate the need for physical file sharing methods."
+            },
+            {
+              icon: Target,
+              title: "Improved Organization",
+              description: "Keep files organized with advanced folder structures and search capabilities."
+            }
+          ],
+          statsTitle: "File Sharing Impact",
+          statsSubtitle: "Real numbers from teams using our file sharing technology",
+          useCasesTitle: "Popular Use Cases",
+          useCases: [
+            { title: "Document Collaboration", description: "Collaborate on documents, presentations, and spreadsheets in real-time." },
+            { title: "Project Files", description: "Share project files and resources with team members and stakeholders." },
+            { title: "Media Sharing", description: "Share images, videos, and other media files with clients and team members." },
+            { title: "Backup & Storage", description: "Use cloud storage for secure backup and access to important files." },
+            { title: "Client Deliverables", description: "Share deliverables and project files with clients securely." },
+            { title: "Team Resources", description: "Share templates, guidelines, and resources with team members." }
+          ]
+        }
+      },
+      {
+        component: DynamicFAQ,
+        props: {
+          subtitle: "Get answers to common questions about file sharing technology, features, and how it can benefit your team.",
+          faqs: [
+            {
+              question: "What is file sharing?",
+              answer: "File sharing is the practice of distributing or providing access to digital files, such as documents, images, videos, and other data, to multiple users or systems."
+            },
+            {
+              question: "How secure is file sharing?",
+              answer: "Our file sharing platform uses end-to-end encryption and advanced security features to protect your files. You can set permissions and control access to ensure security."
+            },
+            {
+              question: "Can I collaborate on files in real-time?",
+              answer: "Yes, you can collaborate on files in real-time with multiple team members. Changes are synced instantly across all devices."
+            },
+            {
+              question: "What file types are supported?",
+              answer: "We support all common file types including documents, images, videos, audio files, and compressed archives."
+            },
+            {
+              question: "How much storage do I get?",
+              answer: "Storage limits depend on your plan. Free users get 5GB, while premium plans offer up to 1TB or more of storage space."
+            }
+          ]
+        }
+      },
+      {
+        component: DynamicGetStarted,
+        props: {
+          title: "Get Started with File Sharing Today",
+          subtitle: "Join millions of users who are already transforming their collaboration with our powerful file sharing technology.",
+          mainCtaTitle: "Ready to Start Sharing?",
+          mainCtaSubtitle: "Download our app and begin sharing files in minutes",
+          primaryCtaText: "Download App",
+          platforms: [
+            {
+              icon: Monitor,
+              name: "Desktop",
+              description: "Windows, macOS, Linux",
+              features: ["Full file features", "Real-time sync", "Advanced controls"]
+            },
+            {
+              icon: Smartphone,
+              name: "Mobile",
+              description: "iOS, Android",
+              features: ["Mobile access", "Camera upload", "Touch controls"]
+            },
+            {
+              icon: Tablet,
+              name: "Tablet",
+              description: "iPad, Android tablets",
+              features: ["Large screen support", "Touch controls", "Multi-touch gestures"]
+            }
+          ],
+          finalCtaTitle: "Transform Your Collaboration Today",
+          finalCtaSubtitle: "Experience the power of seamless file sharing and take your team's collaboration to the next level"
+        }
+      }
+    ]
+  },
 } 
