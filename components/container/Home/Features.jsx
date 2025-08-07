@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Container from '../../common/Container'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
@@ -24,41 +24,117 @@ const featuresData = [
 ]
 
 export default function Features() {
-    return (
-        <section id='features' className="py-16 relative">
-            <div className='absolute top-0 left-0 w-[300px] rounded-full h-[300px] bg-purple-100 blur-3xl z-0' />
-            <div className='absolute top-32 left-64 w-[300px] rounded-full h-[300px] bg-pink-100 blur-3xl z-0' />
-            <div className='absolute top-64 left-0 w-[300px] rounded-full h-[300px] bg-yellow-50 blur-3xl z-0' />
-            <Container className="relative z-10">
-                <Header title="Featured News" description="Discover what's happening with Teams" />
+    const headerRef = useRef(null);
+    const cardsRef = useRef([]);
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {featuresData.map((feature) => (
-                        <div key={feature.id} className="bg-white border-6 border-white rounded-3xl shadow-lg overflow-hidden transition-shadow duration-300">
-                            <div className="relative h-64">
-                                <Image
-                                    src={feature.image}
-                                    alt={feature.alt}
-                                    fill
-                                    className="object-cover"
-                                />
+    useEffect(() => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove animation class first to reset
+                    entry.target.classList.remove('animate-slide-in');
+                    // Force reflow
+                    void entry.target.offsetHeight;
+                    // Add animation class to trigger animation
+                    entry.target.classList.add('animate-slide-in');
+                } else {
+                    // Remove animation class when element is out of view
+                    entry.target.classList.remove('animate-slide-in');
+                }
+            });
+        }, observerOptions);
+
+        if (headerRef.current) observer.observe(headerRef.current);
+        cardsRef.current.forEach((card, index) => {
+            if (card) {
+                card.style.animationDelay = `${0.2 + index * 0.2}s`;
+                observer.observe(card);
+            }
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <>
+            <style jsx>{`
+                @keyframes slideInFromBottom {
+                    0% {
+                        transform: translateY(30px);
+                        opacity: 0;
+                    }
+                    100% {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+                
+                .animate-slide-in {
+                    animation: slideInFromBottom 0.8s ease-out forwards;
+                }
+                
+                @keyframes fadeInUp {
+                    0% {
+                        transform: translateY(40px);
+                        opacity: 0;
+                    }
+                    100% {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                }
+                
+                .animate-fade-in-up {
+                    animation: fadeInUp 0.8s ease-out forwards;
+                }
+            `}</style>
+            
+            <section id='features' className="py-16 relative">
+                <div className='absolute top-0 left-0 w-[300px] rounded-full h-[300px] bg-purple-100 blur-3xl z-0' />
+                <div className='absolute top-32 left-64 w-[300px] rounded-full h-[300px] bg-pink-100 blur-3xl z-0' />
+                <div className='absolute top-64 left-0 w-[300px] rounded-full h-[300px] bg-yellow-50 blur-3xl z-0' />
+                <Container className="relative z-10">
+                    <div ref={headerRef} className="opacity-0">
+                        <Header title="Featured News" description="Discover what's happening with Teams" />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {featuresData.map((feature, index) => (
+                            <div 
+                                key={feature.id} 
+                                ref={el => cardsRef.current[index] = el}
+                                className="bg-white border-6 border-white rounded-3xl shadow-lg overflow-hidden transition-all duration-500 opacity-0 hover:shadow-2xl hover:scale-105"
+                            >
+                                <div className="relative h-64 overflow-hidden">
+                                    <Image
+                                        src={feature.image}
+                                        alt={feature.alt}
+                                        fill
+                                        className="object-cover transition-transform duration-700 hover:scale-110"
+                                    />
+                                </div>
+                                <div className="p-6">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                                        {feature.title}
+                                    </h3>
+                                    <p className="text-gray-600 mb-4 leading-relaxed">
+                                        {feature.description}
+                                    </p>
+                                    <button className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 hover:translate-x-1">
+                                        {feature.buttonText}
+                                        <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                                    </button>
+                                </div>
                             </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                                    {feature.title}
-                                </h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    {feature.description}
-                                </p>
-                                <button className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200">
-                                    {feature.buttonText}
-                                    <ArrowRight className="w-4 h-4 ml-2" />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </Container>
-        </section>
+                        ))}
+                    </div>
+                </Container>
+            </section>
+        </>
     )
 }

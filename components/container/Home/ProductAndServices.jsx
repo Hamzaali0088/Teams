@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Container from '../../common/Container'
 import Header from '../../Ui/Header'
 
 export default function ProductAndServices() {
   const [activeTab, setActiveTab] = useState('business')
+  
+  const headerRef = useRef(null);
+  const tabsRef = useRef(null);
+  const featuredCardRef = useRef(null);
+  const gridCardsRef = useRef([]);
 
   const tabs = [
     { id: 'business', label: 'Business' },
@@ -195,6 +200,41 @@ export default function ProductAndServices() {
     }
   ]
 
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Remove animation class first to reset
+          entry.target.classList.remove('animate-slide-in');
+          // Force reflow
+          void entry.target.offsetHeight;
+          // Add animation class to trigger animation
+          entry.target.classList.add('animate-slide-in');
+        } else {
+          // Remove animation class when element is out of view
+          entry.target.classList.remove('animate-slide-in');
+        }
+      });
+    }, observerOptions);
+
+    if (headerRef.current) observer.observe(headerRef.current);
+    if (tabsRef.current) observer.observe(tabsRef.current);
+    if (featuredCardRef.current) observer.observe(featuredCardRef.current);
+    gridCardsRef.current.forEach((card, index) => {
+      if (card) {
+        card.style.animationDelay = `${0.1 + index * 0.1}s`;
+        observer.observe(card);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [activeTab]);
+
   // Get the appropriate solutions based on active tab
   const getActiveSolutions = () => {
     switch (activeTab) {
@@ -216,96 +256,118 @@ export default function ProductAndServices() {
   const gridSolutions = activeSolutions.filter(s => !s.featured)
 
   return (
-    <section id='products-and-services' className="py-20 bg-white">
-      <Container>
-        {/* Header */}
-        <Header title="Products and services" description="Find the right Teams plan and add-ons for your needs" />
-        <div className="text-start mb-12">
-          
-          {/* Navigation Tabs */}
-          <div className="flex flex-wrap justify-start gap-2">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeTab === tab.id
-                    ? 'bg-purple-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+    <>
+      <style jsx>{`
+        @keyframes slideInFromBottom {
+          0% {
+            transform: translateY(30px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        
+        .animate-slide-in {
+          animation: slideInFromBottom 0.8s ease-out forwards;
+        }
+      `}</style>
+      
+      <section id='products-and-services' className="py-20 bg-white">
+        <Container>
+          {/* Header */}
+          <div ref={headerRef} className="opacity-0">
+            <Header title="Products and services" description="Find the right Teams plan and add-ons for your needs" />
           </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Featured Card - Left Panel */}
-          <div className="lg:col-span-1">
-            <div className="relative h-full rounded-2xl overflow-hidden shadow-xl group">
-              <Image
-                src={featuredSolution?.image || "/st-images/feature1.avif"}
-                alt={featuredSolution?.title || "Featured solution"}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
-              
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-transparent"></div>
-              
-              {/* Content Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">{featuredSolution?.title || "Featured Solution"}</h3>
-                <p className="text-gray-200 mb-4 text-sm">
-                  {featuredSolution?.description || "Discover our featured solution for your needs."}
-                </p>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 flex items-center">
-                  Learn more
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+          
+          <div className="text-start mb-12">
+            {/* Navigation Tabs */}
+            <div ref={tabsRef} className="flex flex-wrap justify-start gap-2 opacity-0">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 ${
+                    activeTab === tab.id
+                      ? 'bg-purple-600 text-white shadow-lg'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {tab.label}
                 </button>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Solution Cards Grid - Right Panel */}
-          <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {gridSolutions.map((solution) => (
-                <div
-                  key={solution.id}
-                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100"
-                >
-                  {/* Icon */}
-                  <div className="text-3xl mb-4">{solution.icon}</div>
-                  
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-300">
-                    {solution.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-gray-600 text-sm mb-6 leading-relaxed">
-                    {solution.description}
+          {/* Main Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Featured Card - Left Panel */}
+            <div ref={featuredCardRef} className="lg:col-span-1 opacity-0">
+              <div className="relative h-full rounded-2xl overflow-hidden shadow-xl group hover:shadow-2xl transition-all duration-500">
+                <Image
+                  src={featuredSolution?.image || "/st-images/feature1.avif"}
+                  alt={featuredSolution?.title || "Featured solution"}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  priority
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-transparent"></div>
+                
+                {/* Content Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">{featuredSolution?.title || "Featured Solution"}</h3>
+                  <p className="text-gray-200 mb-4 text-sm">
+                    {featuredSolution?.description || "Discover our featured solution for your needs."}
                   </p>
-                  
-                  {/* Button */}
-                  <button className="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center group">
+                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center hover:translate-x-1">
                     Learn more
                     <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
                 </div>
-              ))}
+              </div>
+            </div>
+
+            {/* Solution Cards Grid - Right Panel */}
+            <div className="lg:col-span-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {gridSolutions.map((solution, index) => (
+                  <div
+                    key={solution.id}
+                    ref={el => gridCardsRef.current[index] = el}
+                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 group border border-gray-100 opacity-0 hover:scale-105"
+                  >
+                    {/* Icon */}
+                    <div className="text-3xl mb-4 transition-transform duration-300 group-hover:scale-110">{solution.icon}</div>
+                    
+                    {/* Title */}
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                      {solution.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                      {solution.description}
+                    </p>
+                    
+                    {/* Button */}
+                    <button className="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center group hover:translate-x-1">
+                      Learn more
+                      <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   )
 }
